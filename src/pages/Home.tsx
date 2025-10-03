@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
 import Services from "../components/Services";
 import Testimonials from "../components/Testimonials";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <Services/>
       <About/>
       <Testimonials/>
-      <h1>hola ana</h1>
+      <Footer/>
     </>
   );
 }

@@ -3,12 +3,7 @@ export default function Hero() {
     <section
       id="hero"
       className="h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center px-6"
-        style={{
-    background: "linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.6)), url('/src/assets/img/hero-bg.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "100vh",
-  }}
+      style={{ backgroundImage: "url('/src/assets/img/hero-bg.png')" }}
     >
       <h2 className="text-3xl text-purple-700 md:text-5xl font-bold mb-4 drop-shadow-lg">
         Cuidado Integral Femenino con Profesionalismo y Empatía
