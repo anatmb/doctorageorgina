@@ -7,7 +7,7 @@ export default function Navbar() {
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
       <div className="flex justify-between items-center p-4">
         <h1 className="text-lg md:text-xl font-bold text-purple-700">
-          Dra. Elena Martínez
+          Dra. Georgina Meléndez
         </h1>
 
         {/* Menú Desktop */}
