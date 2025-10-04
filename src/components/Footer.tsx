@@ -31,7 +31,6 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-2">Sígueme</h3>
           <div className="flex gap-4 justify-center lg:justify-start">
-            <a href="#" className="hover:text-gray-300">Likendin</a>
             <a href="#" className="hover:text-gray-300">Instagram</a>
           </div>
         </div>
