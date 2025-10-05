@@ -47,7 +47,7 @@ export default function Services() {
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
           {services.map((s, i) => (
             <div key={i} className="bg-purple-100 shadow-md p-6 rounded-xl hover:shadow-lg transition">
-              <FontAwesomeIcon icon={s.icon} className="text-purple-600 text-3xl mb-4" />
+              <FontAwesomeIcon icon={s.icon} className="text-yellow-500 text-3xl mb-4" />
               <h3 className="text-lg md:text-xl font-semibold text-purple-700 mb-2">{s.title}</h3>
               <p className="text-gray-600 text-sm md:text-base">{s.desc}</p>
             </div>

@@ -44,6 +44,9 @@
 //   );
 // }
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+
 export default function Footer() {
   return (
     <footer id="contact" className="w-full bg-purple-700 text-white py-10">
@@ -79,7 +82,10 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-2">Sígueme</h3>
             <div className="flex gap-4 justify-center lg:justify-start">
-              <a href="#" className="hover:text-gray-300">Instagram</a>
+              {/* <a href="#" className="hover:text-gray-300">Instagram</a> */}
+                <a href="#" className="text-yellow-500 hover:text-yellow-600 text-2xl">
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
             </div>
           </div>
         </div>
