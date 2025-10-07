@@ -1,22 +1,25 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./calendar-custom.css"; // para estilos personalizados
+import "../styles/calendar-custom.css"; // asegúrate de tener este archivo en src/
 
-export default function CalendarPage() {
+export default function Agenda() {
   const [date, setDate] = useState(new Date());
+
+  // Días no disponibles (tachados en morado)
   const unavailableDates = [
     new Date(2025, 9, 7),
     new Date(2025, 9, 10),
     new Date(2025, 9, 14),
   ];
 
-  // Formatea fechas para comparar
   const formatDate = (d) => d.toISOString().split("T")[0];
+  const isUnavailable = (day) =>
+    unavailableDates.some((d) => formatDate(d) === formatDate(day));
 
   return (
     <section className="min-h-screen bg-purple-50 flex flex-col md:flex-row justify-center items-start gap-10 p-6 md:p-12">
-      {/* Calendario */}
+      {/* 📅 Calendario */}
       <div className="bg-white shadow-md rounded-2xl p-6 flex-1">
         <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
           Agenda tu cita
@@ -25,14 +28,8 @@ export default function CalendarPage() {
         <Calendar
           onChange={setDate}
           value={date}
-          tileDisabled={({ date }) =>
-            unavailableDates.some((d) => formatDate(d) === formatDate(date))
-          }
-          tileClassName={({ date }) => {
-            if (unavailableDates.some((d) => formatDate(d) === formatDate(date))) {
-              return "unavailable-day";
-            }
-          }}
+          tileDisabled={({ date }) => isUnavailable(date)}
+          tileClassName={({ date }) => (isUnavailable(date) ? "unavailable-day" : "")}
         />
 
         <div className="mt-6 text-center">
@@ -43,10 +40,10 @@ export default function CalendarPage() {
             </span>
           </p>
           <button
-            disabled={unavailableDates.some((d) => formatDate(d) === formatDate(date))}
+            disabled={isUnavailable(date)}
             className={`mt-4 px-6 py-2 rounded-full font-semibold transition 
               ${
-                unavailableDates.some((d) => formatDate(d) === formatDate(date))
+                isUnavailable(date)
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-purple-600 hover:bg-purple-700 text-white"
               }`}
@@ -56,7 +53,7 @@ export default function CalendarPage() {
         </div>
       </div>
 
-      {/* Publicidad / Información */}
+      {/* 📣 Publicidad / Información */}
       <aside className="bg-white shadow-md rounded-2xl p-6 w-full md:w-1/3">
         <h3 className="text-xl font-bold text-purple-700 mb-4 text-center">
           Promociones y Noticias

@@ -1,0 +1,21 @@
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  background: transparent;
+}
+
+.unavailable-day {
+  color: #a855f7 !important;
+  text-decoration: line-through;
+  pointer-events: none;
+}
+
+.react-calendar__tile--active {
+  background: #a855f7 !important;
+  color: white !important;
+}
+
+.react-calendar__tile:hover {
+  background: #d8b4fe !important;
+}

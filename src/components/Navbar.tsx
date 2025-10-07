@@ -47,7 +47,8 @@
 //      </header>
 //    );
 //  }
-
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
  import { useState } from "react";
 
  export default function Navbar() {
@@ -78,7 +79,7 @@
          </nav>
 
          {/* Botón Desktop */}
-         <button className="hidden md:block bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition-colors">
+         <button  onClick={() => navigate("/agenda")} className="hidden md:block bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition-colors">
            Agenda tu cita
          </button>
 
