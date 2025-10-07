@@ -48,10 +48,11 @@
 //    );
 //  }
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
+
  import { useState } from "react";
 
  export default function Navbar() {
+  const navigate = useNavigate();
    const [open, setOpen] = useState(false);
 
    return (
