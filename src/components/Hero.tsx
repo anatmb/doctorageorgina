@@ -236,7 +236,7 @@ export default function Hero() {
             </button>
             <button className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-5 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full sm:w-auto">
               <FontAwesomeIcon icon={faLocationDot} />
-              Contáctame
+              Mis servicios
             </button>
           </div>
 
