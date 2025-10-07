@@ -106,32 +106,121 @@
 //     </section>
 //   );
 // }
+
+
+//  import { faCalendarDays, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+
+
+
+//  import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//  import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+
+//  export default function Hero() {
+//    return (
+//      <section className="bg-white mt-9">
+//        {/* Contenedor principal */}
+//        <div className=" mx-auto flex flex-col-reverse md:flex-row items-center gap-10 px-6 py-12">
+        
+//          {/* Imagen izquierda */}
+//          <div className="w-full md:w-1/2 flex justify-center">
+//            <img
+//              src="/src/assets/img/foto-hero.png"
+//              alt="Dra. Georgina Meléndez"
+//              className="rounded-xl shadow-lg object-cover w-full sm:w-4/5 md:w-full max-w-sm md:max-w-none"
+//            />
+//          </div>
+
+//          {/* Contenido derecho */}
+//          <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
+//            <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold text-purple-700 leading-snug">
+//              Cuidado Integral Femenino con Profesionalismo y Empatía
+//            </h2>
+//            <p className="text-gray-700 text-base sm:text-lg">
+//              Tu bienestar es nuestra prioridad en cada etapa de tu vida.
+//            </p>
+
+//            {/* Botones */}
+//            <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
+//              <button className="flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto">
+//                <FontAwesomeIcon icon={faCalendarDays} />
+//                Agenda tu cita
+//              </button>
+//              <button className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-5 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full sm:w-auto">
+//               <FontAwesomeIcon icon={faLocationDot} />
+//                Contáctame
+//              </button>
+//            </div>
+
+//            {/* Íconos redes */}
+//             <div className="flex justify-center md:justify-start gap-5 pt-3">
+//              <a href="#" className="text-yellow-500 hover:text-yellow-600 text-2xl">
+//                <FontAwesomeIcon icon={faInstagram} />
+//              </a>
+//              <a href="#" className="text-yellow-500 hover:text-yellow-600 text-2xl">
+//                <FontAwesomeIcon icon={faWhatsapp} />
+//              </a> 
+//            </div> 
+
+//            {/* Promo especial */}
+//            <div className="border border-purple-200 rounded-lg shadow-md p-6 bg-purple-50 w-full md:mx-0">
+//              <p className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+//                Promo Especial
+//              </p>
+//              <h3 className="text-xl font-bold text-purple-700 mt-1">
+//                Colposcopía + Consulta
+//              </h3>
+//              <p className="text-3xl font-bold text-gray-800 mt-3">$450</p>
+//              <button className="mt-5 w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition">
+//                Ver detalles
+//              </button>
+//            </div>
+//          </div>
+//        </div>
+
+//        {/* Alianzas */}
+//        <div className="bg-white border-t border-yellow-400 py-6">
+//          {/* <div className="max-w-6xl mx-auto text-center px-4">
+// //           <h4 className="text-purple-700 font-semibold text-lg mb-4">
+// //             Nuestras Alianzas:
+// //           </h4>
+// //           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-500">
+// //             <span>logo 1</span>
+// //             <span>logo 1</span>
+// //             <span>logo 1</span>
+// //             <span>logo 1</span>
+// //             <span>logo 1</span>
+// //           </div>
+// //         </div> */}
+//        </div>
+//      </section>
+//    );
+//  }
+
+
+
 import { faCalendarDays, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
-
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 export default function Hero() {
   return (
-    <section className="bg-white mt-16">
+    <section id="inicio" className="bg-white w-full">
       {/* Contenedor principal */}
-      <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10 px-6 py-12">
+      <div className="max-w-screen-xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10 px-6 pt-24 md:py-30 lg:pt-24 pb-4">
         
         {/* Imagen izquierda */}
         <div className="w-full md:w-1/2 flex justify-center">
           <img
             src="/src/assets/img/foto-hero.png"
             alt="Dra. Georgina Meléndez"
-            className="rounded-xl shadow-lg object-cover w-full sm:w-4/5 md:w-full max-w-sm md:max-w-none"
+            className="w-full h-auto max-h-[500px] object-contain rounded-2xl"
           />
         </div>
 
         {/* Contenido derecho */}
         <div className="w-full md:w-1/2 text-center md:text-left space-y-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-purple-700 leading-snug">
-            Cuidado Integral Femenino con Profesionalismo y Empatía
+          <h2 className="text-3xl sm:text-4xl font-semibold text-purple-700 leading-snug">
+            Cuidado Integral Femenino con <br /> Profesionalismo y Empatía
           </h2>
           <p className="text-gray-700 text-base sm:text-lg">
             Tu bienestar es nuestra prioridad en cada etapa de tu vida.
@@ -150,45 +239,45 @@ export default function Hero() {
           </div>
 
           {/* Íconos redes */}
-           <div className="flex justify-center md:justify-start gap-5 pt-3">
+          <div className="flex justify-center md:justify-start gap-5 pt-3">
             <a href="#" className="text-yellow-500 hover:text-yellow-600 text-2xl">
               <FontAwesomeIcon icon={faInstagram} />
             </a>
             <a href="#" className="text-yellow-500 hover:text-yellow-600 text-2xl">
               <FontAwesomeIcon icon={faWhatsapp} />
-            </a> 
-          </div> 
+            </a>
+          </div>
 
           {/* Promo especial */}
-          <div className="border border-purple-200 rounded-lg shadow-md p-6 bg-purple-50 w-full md:mx-0">
-            <p className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-              Promo Especial
+          <div className="mt-8 lg:mt-0 lg:self-start border-4 border-purple-700 rounded-lg shadow-xl p-5 bg-white w-full sm:w-80 xl:w-96">
+            <p className="text-lg font-semibold text-gray-800">PROMO ESPECIAL</p>
+            <h3 className="text-xl font-extrabold text-purple-700">COLPOSCOPIA + CONSULTA</h3>
+            <p className="text-5xl font-black text-purple-800 mt-2">
+                <span className="text-3xl align-top text-gray-700">$</span>450
             </p>
-            <h3 className="text-xl font-bold text-purple-700 mt-1">
-              Colposcopía + Consulta
-            </h3>
-            <p className="text-3xl font-bold text-gray-800 mt-3">$450</p>
-            <button className="mt-5 w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition">
+            <button className="mt-4 w-full bg-purple-700 text-white py-2 rounded-md hover:bg-purple-800 transition">
               Ver detalles
             </button>
           </div>
+        
+      
         </div>
       </div>
 
-      {/* Alianzas */}
-      <div className="bg-white border-t border-yellow-400 py-6">
-        {/* <div className="max-w-6xl mx-auto text-center px-4">
-          <h4 className="text-purple-700 font-semibold text-lg mb-4">
-            Nuestras Alianzas:
+      {/* Sección de Alianzas */}
+      <div className="bg-white border-t border-yellow-400 pt-2 pb-8">
+        <div className="max-w-screen-xl mx-auto text-center px-4">
+          <h4 className="text-purple-700 font-semibold text-lg mb-2">
+            Nuestras Alianzas
           </h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-500">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-500 justify-items-center">
             <span>logo 1</span>
-            <span>logo 1</span>
-            <span>logo 1</span>
-            <span>logo 1</span>
-            <span>logo 1</span>
+            <span>logo 2</span>
+            <span>logo 3</span>
+            <span>logo 4</span>
+            <span>logo 5</span>
           </div>
-        </div> */}
+        </div>
       </div>
     </section>
   );
