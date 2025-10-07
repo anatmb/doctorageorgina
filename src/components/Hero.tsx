@@ -201,8 +201,10 @@
 import { faCalendarDays, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+    const navigate = useNavigate();
   return (
     <section id="inicio" className="bg-white w-full">
       {/* Contenedor principal */}
@@ -228,7 +230,7 @@ export default function Hero() {
 
           {/* Botones */}
           <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
-            <button className="flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto">
+            <button  onClick={() => navigate("/agenda")} className="flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto">
               <FontAwesomeIcon icon={faCalendarDays} />
               Agenda tu cita
             </button>
