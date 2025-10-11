@@ -6,6 +6,7 @@ import Agenda from "./pages/Agenda.tsx";
 
 import './App.css'
 import Navbar from "./components/Navbar.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
 
@@ -18,8 +19,9 @@ function App() {
         <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="/agenda" element={<Agenda />} /> {/* 🟣 nueva ruta */}
+        <Route path="/agenda" element={<Agenda />} /> 
       </Routes>
+      <Footer/>
     </Router>
     </>
   )

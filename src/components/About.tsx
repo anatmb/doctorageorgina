@@ -49,7 +49,7 @@ export default function About() {
         {/* Texto */}
         <div className="flex-1">
           <h2 className="text-3xl font-bold text-purple-700 mb-4">
-            Dra. Georgina Meléndez
+            Dra. Gineco-Obstetra
           </h2>
           <p className="text-black mb-4">
             Tengo más de 15 años de experiencia en ginecología y obstetricia, me dedico a brindar atención médica

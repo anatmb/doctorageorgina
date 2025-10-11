@@ -18,7 +18,7 @@ export default function Agenda() {
     unavailableDates.some((d) => formatDate(d) === formatDate(day));
 
   return (
-    <section className="min-h-screen bg-purple-50 flex flex-col md:flex-row justify-center items-start gap-10 p-6 md:p-12">
+    <section className="min-h-screen bg-purple-50 flex flex-col pt-20  md:flex-row md:pt-24 justify-center items-start gap-10 p-6 md:p-24">
       {/* 📅 Calendario */}
       <div className="bg-white shadow-md rounded-2xl p-6 flex-1">
         <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
