@@ -295,7 +295,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section id="inicio" className="bg-white w-full pt-20 md:pt-24">
+    <section id="inicio" className="bg-white w-full pt-10 md:pt-2">
       
       {/* ✅ Versión APP (solo móvil) */}
       <div className="flex flex-col items-center text-center py-10 bg-purple-800 text-white rounded-b-3xl md:hidden">
@@ -307,7 +307,7 @@ export default function Hero() {
           />
         </div>
         <h1 className="text-2xl font-semibold">Dra. Georgina Meléndez</h1>
-        <p className="text-yellow-400 tracking-wide text-sm font-medium">GINECÓLOGA</p>
+        <p className="text-yellow-400 tracking-wide text-sm font-medium">GINECÓLOGA y OBSTETRA</p>
 
         <div className="flex flex-col gap-3 w-full px-8 mt-8">
           <button
