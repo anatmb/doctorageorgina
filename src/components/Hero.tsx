@@ -70,15 +70,15 @@ export default function Hero() {
           </p>
 
           {/* Botones */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
+          <div className="flex flex-col md:flex-row justify-center md:justify-start gap-3 sm:gap-4">
             <button
               onClick={() => navigate("/agenda")}
-              className="btn-inline first:flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-purple-700 text-white px-4 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full md:w-auto"
             >
               <FontAwesomeIcon icon={faCalendarDays} />
               Agenda tu cita
             </button>
-            <button className="btn-inline flex items-center justify-center gap-2 bg-yellow-500 text-white px-5 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full sm:w-auto">
+            <button className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full md:w-auto">
               <FontAwesomeIcon icon={faLocationDot} />
               Mis servicios
             </button>
@@ -99,7 +99,7 @@ export default function Hero() {
               <FontAwesomeIcon icon={faWhatsapp} />
             </a>
           </div>
-               {/* div de promo */}
+          {/* div de promo */}
           <div className="mt-8 border-4 border-purple-700 rounded-lg shadow-xl p-5 bg-white w-full sm:w-80 md:w-96 md:hidden lg:block">
             {" "}
             {/* CLASE MODIFICADA */}
