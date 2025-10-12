@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tus estilos personalizados */
 @media (min-width: 768px) and (max-width: 788px) {
   .btn-inline {
     width: auto !important;

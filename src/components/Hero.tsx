@@ -73,7 +73,7 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4">
             <button
               onClick={() => navigate("/agenda")}
-              className="btn-inline flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto"
+              className="btn-inline first:flex items-center justify-center gap-2 bg-purple-700 text-white px-5 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full sm:w-auto"
             >
               <FontAwesomeIcon icon={faCalendarDays} />
               Agenda tu cita
