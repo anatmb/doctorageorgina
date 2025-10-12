@@ -4,10 +4,41 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import logo1 from "../assets/img/logo1.jpeg";
+import logo2 from "../assets/img/logo2.jpeg";
+import logo3 from "../assets/img/logo3.jpeg";
+import logo4 from "../assets/img/logo4.jpg";
+import logo5 from "../assets/img/logo5.png"
 
 export default function Hero() {
   const navigate = useNavigate();
+    const location = useLocation();
+
+  
+    const handleScroll = (id: string) => {
+    
+  
+      // Si ya estás en la página principal
+      if (location.pathname === "/") {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // Si estás en otra página, primero vuelve a "/"
+        navigate("/", { replace: false });
+  
+        // Espera un poco y luego hace scroll (para dar tiempo a montar el Home)
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 300);
+      }
+    };
+  
 
   return (
     <section id="inicio" className="bg-white w-full pt-10 md:pt-2">
@@ -33,7 +64,7 @@ export default function Hero() {
             <FontAwesomeIcon icon={faCalendarDays} />
             Turnos
           </button>
-          <button className="flex items-center justify-center gap-2 bg-white text-purple-800 py-3 rounded-lg font-medium hover:bg-purple-100 transition">
+          <button  className="flex items-center justify-center gap-2 bg-white text-purple-800 py-3 rounded-lg font-medium hover:bg-purple-100 transition">
             <FontAwesomeIcon icon={faLocationDot} />
             Servicios
           </button>
@@ -72,13 +103,13 @@ export default function Hero() {
           {/* Botones */}
           <div className="flex flex-col md:flex-row justify-center md:justify-start gap-3 sm:gap-4">
             <button
-              onClick={() => navigate("/agenda")}
+               onClick={() => navigate("/agenda")}
               className="flex items-center justify-center gap-2 bg-purple-700 text-white px-4 py-3 rounded-lg font-medium hover:bg-purple-800 transition w-full md:w-auto"
             >
               <FontAwesomeIcon icon={faCalendarDays} />
               Agenda tu cita
             </button>
-            <button className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full md:w-auto">
+            <button onClick={() => handleScroll("services")}className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full md:w-auto">
               <FontAwesomeIcon icon={faLocationDot} />
               Mis servicios
             </button>
@@ -120,20 +151,42 @@ export default function Hero() {
       </div>
 
       {/* Sección Alianzas */}
-      <div className="bg-white border-t border-yellow-400 pt-2 pb-8 hidden md:block">
-        <div className="max-w-screen-xl mx-auto text-center px-4">
-          <h4 className="text-purple-700 font-semibold text-lg mb-2">
-            Nuestras Alianzas
-          </h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-gray-500 justify-items-center">
-            <span>logo 1</span>
-            <span>logo 2</span>
-            <span>logo 3</span>
-            <span>logo 4</span>
-            <span>logo 5</span>
-          </div>
-        </div>
-      </div>
+   <div className="bg-white border-t border-yellow-400 pt-2 pb-8 hidden md:block">
+  <div className="max-w-screen-xl mx-auto text-center px-4">
+    <h4 className="text-purple-700 font-semibold text-lg mb-2">
+      Nuestras Alianzas
+    </h4>
+
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 justify-items-center">
+      <img
+        src={logo1 }
+        alt="Logo 1"
+        className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition duration-300"
+      />
+      <img
+        src={logo2 }
+        alt="Logo 2"
+        className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition duration-300 rounded-lg"
+      />
+      <img
+          src={logo3 }
+        alt="Logo 3"
+        className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition duration-300 rounded-lg"
+      />
+      <img
+         src={logo4 }
+        alt="Logo 4"
+        className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition duration-300"
+      />
+      <img
+          src={logo5 }
+        alt="Logo 5"
+        className="h-12 w-auto object-contain grayscale hover:grayscale-0 transition duration-300"
+      />
+    </div>
+  </div>
+</div>
+
     </section>
   );
 }
