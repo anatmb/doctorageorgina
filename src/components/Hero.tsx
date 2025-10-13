@@ -64,7 +64,7 @@ export default function Hero() {
             <FontAwesomeIcon icon={faCalendarDays} />
             Turnos
           </button>
-          <button  className="flex items-center justify-center gap-2 bg-white text-purple-800 py-3 rounded-lg font-medium hover:bg-purple-100 transition">
+          <button  onClick={() => handleScroll("services")} className="flex items-center justify-center gap-2 bg-white text-purple-800 py-3 rounded-lg font-medium hover:bg-purple-100 transition">
             <FontAwesomeIcon icon={faLocationDot} />
             Servicios
           </button>
@@ -109,7 +109,7 @@ export default function Hero() {
               <FontAwesomeIcon icon={faCalendarDays} />
               Agenda tu cita
             </button>
-            <button onClick={() => handleScroll("services")}className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full md:w-auto">
+            <button onClick={() => handleScroll("services")} className="flex items-center justify-center gap-2 bg-yellow-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-yellow-600 transition w-full md:w-auto">
               <FontAwesomeIcon icon={faLocationDot} />
               Mis servicios
             </button>
