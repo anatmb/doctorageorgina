@@ -1,212 +1,155 @@
 import { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import "../styles/calendar-custom.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 export default function Agenda() {
-  const [date, setDate] = useState(new Date());
-  const [selectedHour, setSelectedHour] = useState("");
-  const [step, setStep] = useState(1); // 🔹 1 = calendario, 2 = formulario
+  const [step, setStep] = useState<"calendar" | "form">("calendar");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
   const [formData, setFormData] = useState({
     nombre: "",
+    apellido: "",
     email: "",
     telefono: "",
     motivo: "",
   });
 
-  // Días no disponibles
-  const unavailableDates = [
-    new Date(2025, 9, 7),
-    new Date(2025, 9, 10),
-    new Date(2025, 9, 14),
-  ];
-
-  const availableHours = [
-    "08:00 AM",
-    "09:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "03:00 PM",
-    "04:00 PM",
-    "05:00 PM",
-  ];
-
-  const formatDate = (d) => d.toISOString().split("T")[0];
-  const isUnavailable = (day) =>
-    unavailableDates.some((d) => formatDate(d) === formatDate(day));
-
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
-    setSelectedHour("");
-  };
-
   const handleConfirm = () => {
-    setStep(2); // 🔹 Avanzar al formulario
+    if (!selectedDate) {
+      alert("Por favor selecciona una fecha.");
+      return;
+    }
+    if (!selectedTime) {
+      alert("Por favor selecciona una hora.");
+      return;
+    }
+    setStep("form");
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(
-      `✅ Cita confirmada para ${formData.nombre}\n📅 ${date.toLocaleDateString()} a las ${selectedHour}\n📞 ${formData.telefono}\n✉ ${formData.email}\n🩺 Motivo: ${formData.motivo}`
-    );
-    // Aquí podrías enviar los datos al backend o WhatsApp
+    console.log("Datos enviados:", { selectedDate, selectedTime, ...formData });
+    alert("Tu turno fue enviado correctamente 🩺");
+    setStep("calendar");
+    setFormData({ nombre: "", apellido: "", email: "", telefono: "", motivo: "" });
+    setSelectedDate("");
+    setSelectedTime("");
   };
 
   return (
-    <section className="min-h-screen bg-purple-50 flex flex-col pt-20 md:flex-row md:pt-24 justify-center items-start gap-10 p-6 md:p-24">
-      <div className="bg-white shadow-md rounded-2xl p-6 flex-1">
-        <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
-          Agenda tu cita
-        </h2>
+    <section className="min-h-screen bg-purple-50 flex flex-col items-center justify-center px-4 py-10">
+      {step === "calendar" && (
+        <div className="bg-white rounded-2xl shadow-md p-6 w-full max-w-md text-center">
+          <FontAwesomeIcon icon={faCalendarDays} className="text-purple-600 text-4xl mb-3" />
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Selecciona tu turno</h2>
+          <p className="text-gray-600 mb-4">Elige el día y la hora disponible para tu consulta</p>
 
-        {step === 1 && (
-          <>
-            {/* 📅 Calendario */}
-            <Calendar
-              onChange={handleDateChange}
-              value={date}
-              tileDisabled={({ date }) => isUnavailable(date)}
-              tileClassName={({ date }) =>
-                isUnavailable(date) ? "unavailable-day" : ""
-              }
+          {/* Selección de fecha */}
+          <label className="block text-left text-gray-700 mb-1">Fecha:</label>
+          <input
+            type="date"
+            className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+
+          {/* Selección de hora */}
+          <label className="block text-left text-gray-700 mb-1">Hora:</label>
+          <select
+            className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+          >
+            <option value="">Seleccionar hora</option>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+          </select>
+
+          <button
+            onClick={handleConfirm}
+            className="mt-2 w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition-colors duration-300"
+          >
+            Confirmar turno
+          </button>
+        </div>
+      )}
+
+      {step === "form" && (
+        <div className="bg-white rounded-2xl shadow-md p-6 w-full max-w-md">
+          <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
+            Completa tus datos
+          </h2>
+
+          <p className="text-sm text-gray-600 text-center mb-4">
+            Turno seleccionado: <br />
+            <span className="font-semibold text-purple-700">{selectedDate}</span> a las{" "}
+            <span className="font-semibold text-purple-700">{selectedTime}</span>
+          </p>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <input
+              type="text"
+              placeholder="Nombre"
+              className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+              value={formData.nombre}
+              onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Apellido"
+              className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+              value={formData.apellido}
+              onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Teléfono"
+              className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+              value={formData.telefono}
+              onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+              required
+            />
+            <textarea
+              placeholder="Motivo de la consulta"
+              className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+              value={formData.motivo}
+              onChange={(e) => setFormData({ ...formData, motivo: e.target.value })}
+              required
             />
 
-            <div className="mt-6 text-center">
-              <p className="text-gray-700">
-                Fecha seleccionada:{" "}
-                <span className="font-semibold text-purple-700">
-                  {date.toLocaleDateString()}
-                </span>
-              </p>
-            </div>
+            <button
+              type="submit"
+              className="bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition-colors duration-300"
+            >
+              Enviar solicitud
+            </button>
 
-            {!isUnavailable(date) && (
-              <div className="mt-6">
-                <h3 className="text-lg font-semibold text-purple-700 mb-3 text-center">
-                  Selecciona una hora disponible:
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {availableHours.map((hour) => (
-                    <button
-                      key={hour}
-                      onClick={() => setSelectedHour(hour)}
-                      className={`border rounded-full py-2 text-sm font-medium transition ${
-                        selectedHour === hour
-                          ? "bg-purple-600 text-white"
-                          : "border-purple-400 text-purple-700 hover:bg-purple-100"
-                      }`}
-                    >
-                      {hour}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="mt-6 text-center">
-              <button
-                disabled={!selectedHour || isUnavailable(date)}
-                onClick={handleConfirm}
-                className={`mt-4 px-6 py-2 rounded-full font-semibold transition ${
-                  !selectedHour || isUnavailable(date)
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-purple-600 hover:bg-purple-700 text-white"
-                }`}
-              >
-                Confirmar cita
-              </button>
-            </div>
-          </>
-        )}
-
-        {step === 2 && (
-          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-            <h3 className="text-lg font-semibold text-purple-700 mb-4 text-center">
-              Ingresa tus datos
-            </h3>
-            <div>
-              <label className="block text-gray-700 text-sm mb-1">Nombre completo</label>
-              <input
-                type="text"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm mb-1">Correo electrónico</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm mb-1">Teléfono</label>
-              <input
-                type="tel"
-                name="telefono"
-                value={formData.telefono}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm mb-1">Motivo de la consulta</label>
-              <textarea
-                name="motivo"
-                value={formData.motivo}
-                onChange={handleChange}
-                required
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-                rows="3"
-              />
-            </div>
-
-            <div className="text-center mt-6">
-              <button
-                type="submit"
-                className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-semibold transition"
-              >
-                Enviar cita
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setStep("calendar")}
+              className="text-purple-600 mt-2 underline text-sm"
+            >
+              Volver al calendario
+            </button>
           </form>
-        )}
-      </div>
-
-      {/* 📣 Publicidad / Información */}
-      <aside className="bg-white shadow-md rounded-2xl p-6 w-full md:w-1/3">
-        <h3 className="text-xl font-bold text-purple-700 mb-4 text-center">
-          Promociones y Noticias
-        </h3>
-        <div className="space-y-4">
-          <div className="p-4 border-l-4 border-yellow-400 bg-yellow-50 rounded">
-            <p className="font-semibold">Colposcopía + Consulta</p>
-            <p className="text-gray-600">$450 - Solo este mes</p>
-          </div>
-          <div className="p-4 border-l-4 border-purple-400 bg-purple-50 rounded">
-            <p className="font-semibold">Chequeo Preventivo</p>
-            <p className="text-gray-600">Agenda tu turno online y evita esperas</p>
-          </div>
-          <div className="p-4 border-l-4 border-pink-400 bg-pink-50 rounded">
-            <p className="font-semibold">Preguntas Frecuentes</p>
-            <p className="text-gray-600">Resuelve tus dudas antes de tu cita</p>
-          </div>
         </div>
-      </aside>
+      )}
     </section>
   );
 }
-
