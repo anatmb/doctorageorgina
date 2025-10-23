@@ -3,10 +3,15 @@ import { createAppointment, getAppointmentsByDate } from "../controllers/appoint
 
 const router = express.Router();
 
+// Ruta de prueba
+router.get("/", (req, res) => {
+  res.json({ message: "API de citas funcionando correctamente 🚀" });
+});
+
 // Crear una nueva cita
 router.post("/", createAppointment);
 
-// Obtener citas por fecha específica (por ejemplo /api/appointments/2025-10-20)
+// Obtener citas por fecha (por ejemplo /api/appointments/2025-10-20)
 router.get("/:date", getAppointmentsByDate);
 
 export default router;

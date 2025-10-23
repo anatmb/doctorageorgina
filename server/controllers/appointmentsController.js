@@ -1,6 +1,7 @@
-import { pool } from "../db.js";
+import  pool  from "../db/connection.js";
 
-// ✅ Controlador: crear nueva cita
+
+// Crear nueva cita
 export const createAppointment = async (req, res) => {
   try {
     const { nombre, apellido, email, telefono, motivo, fecha, hora } = req.body;
@@ -22,16 +23,14 @@ export const createAppointment = async (req, res) => {
   }
 };
 
-// ✅ Controlador: obtener citas por fecha
+// Obtener citas por fecha
 export const getAppointmentsByDate = async (req, res) => {
   try {
     const { date } = req.params;
-
     const result = await pool.query(
       `SELECT * FROM appointments WHERE fecha = $1 ORDER BY hora`,
       [date]
     );
-
     res.json(result.rows);
   } catch (error) {
     console.error("Error al obtener citas:", error);
