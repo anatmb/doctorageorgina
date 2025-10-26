@@ -17,4 +17,6 @@ router.get("/", getAllAppointments);
 router.get("/:date", getAppointmentsByDate);
 
 
+
+
 export default router;
