@@ -7,6 +7,9 @@ import Agenda from "./pages/Agenda.tsx";
 import './App.css'
 import Navbar from "./components/Navbar.tsx";
 import Footer from "./components/Footer.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
+import AdminCitas from "./pages/admin.tsx";
+
 
 
 function App() {
@@ -21,6 +24,8 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/agenda" element={<Agenda />} /> 
+          <Route path="/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminCitas />} />
       </Routes>
       <Footer/>
     </Router>

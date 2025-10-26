@@ -131,7 +131,7 @@ export default function Hero() {
             </a>
           </div>
           {/* div de promo */}
-          <div className="mt-8 border-4 border-purple-700 rounded-lg shadow-xl p-5 bg-white w-full sm:w-80 md:w-96 md:hidden lg:block">
+          <div className="mt-8 border-4 border-purple-700 rounded-lg shadow-xl p-5 bg-white w-full sm:w-80 md:w-full md:hidden lg:block">
             {" "}
             {/* CLASE MODIFICADA */}
             <p className="text-lg font-semibold text-gray-800">
