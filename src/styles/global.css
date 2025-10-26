@@ -7,6 +7,12 @@
       @apply py-1.5 px-3 text-center bg-blue-700 rounded-md text-white;
   } */
 }
+
+@layer utilities {
+  .clip-path-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+}
 @keyframes blob {
   0%, 100% { transform: translate(0px, 0px) scale(1); }
   33% { transform: translate(15px, -10px) scale(1.1); }
