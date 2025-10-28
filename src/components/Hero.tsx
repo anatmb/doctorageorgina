@@ -9,36 +9,32 @@ import logo1 from "../assets/img/logo1.jpeg";
 import logo2 from "../assets/img/logo2.jpeg";
 import logo3 from "../assets/img/logo3.jpeg";
 import logo4 from "../assets/img/logo4.jpg";
-import logo5 from "../assets/img/logo5.png"
+import logo5 from "../assets/img/logo5.png";
 
 export default function Hero() {
   const navigate = useNavigate();
-    const location = useLocation();
+  const location = useLocation();
 
-  
-    const handleScroll = (id: string) => {
-    
-  
-      // Si ya estás en la página principal
-      if (location.pathname === "/") {
+  const handleScroll = (id: string) => {
+    // Si ya estás en la página principal
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Si estás en otra página, primero vuelve a "/"
+      navigate("/", { replace: false });
+
+      // Espera un poco y luego hace scroll (para dar tiempo a montar el Home)
+      setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      } else {
-        // Si estás en otra página, primero vuelve a "/"
-        navigate("/", { replace: false });
-  
-        // Espera un poco y luego hace scroll (para dar tiempo a montar el Home)
-        setTimeout(() => {
-          const element = document.getElementById(id);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 300);
-      }
-    };
-  
+      }, 300);
+    }
+  };
 
   return (
     // <section id="inicio" className="relative">
@@ -82,7 +78,7 @@ export default function Hero() {
 
     //   {/* ✅ Versión ESCRITORIO / TABLET */}
     //  <div className="relative overflow-hidden pt-20 lg:pt-0 pb-12 lg:pb-0">
-        
+
     //     {/* === Fondo y Onda Diagonal (Nueva Estructura) === */}
     //     {/* El fondo púrpura-claro se extiende y se 'corta' diagonalmente */}
     //     <div className="absolute inset-0 bg-purple-100 transform -skew-y-3 origin-top-left">
@@ -91,9 +87,9 @@ export default function Hero() {
 
     //     {/* --- La Onda (SVG para una división suave) --- */}
     //     <svg
-    //       className="absolute top-0 w-full h-auto text-white fill-current z-10" 
+    //       className="absolute top-0 w-full h-auto text-white fill-current z-10"
     //       style={{ height: '100%', top: 0, left: 0 }}
-    //       viewBox="0 0 100 100" 
+    //       viewBox="0 0 100 100"
     //       preserveAspectRatio="none"
     //     >
     //       {/* Este path crea una onda suave y diagonal. Ajusta los puntos C y L para cambiar la forma. */}
@@ -103,8 +99,8 @@ export default function Hero() {
     //     {/* ---------------------------------------------------- */}
     //     {/* --- Contenido (Texto e Imagen) --- */}
     //     {/* ---------------------------------------------------- */}
-    //     <div className="grid max-w-screen-xl px-6 pt-12 pb-12 mx-auto lg:gap-8 xl:gap-0 lg:py-20 lg:grid-cols-12 lg:pt-28 relative z-20"> 
-          
+    //     <div className="grid max-w-screen-xl px-6 pt-12 pb-12 mx-auto lg:gap-8 xl:gap-0 lg:py-20 lg:grid-cols-12 lg:pt-28 relative z-20">
+
     //       {/* --- Columna izquierda: contenido --- */}
     //       <div className="mr-auto place-self-center lg:col-span-7 text-center lg:text-left">
     //         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold leading-tight tracking-tight text-black md:text-5xl xl:text-6xl">
@@ -153,13 +149,13 @@ export default function Hero() {
     //       <div className="hidden lg:mt-0 lg:col-span-5 lg:flex justify-center items-center">
     //         <img
     //           // **Ruta de la imagen que generamos del útero y flores**
-    //           src="/src/assets/img/hero.png" 
+    //           src="/src/assets/img/hero.png"
     //           alt="Símbolo de Cuidado Femenino"
     //           className="w-full h-auto object-contain max-h-[400px] shadow-lg rounded-xl"
     //         />
     //       </div>
     //     </div>
-        
+
     //   </div>
 
     //   {/* ---------------------------------------------------- */}
@@ -203,47 +199,65 @@ export default function Hero() {
     //   </div>
 
     // </section>
-     <section id="inicio" className="bg-white py-16 w-full">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 items-center gap-10 px-6">
-        {/* --- Columna izquierda: texto --- */}
-        <div className="text-center lg:text-left">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-            Cuidado Integral Femenino con{" "}
-            <span className="text-purple-700">Profesionalismo</span> y{" "}
-            <span className="text-purple-700">Empatía</span>
-          </h1>
+    <section id="inicio" className="bg-white py-16 w-full">
+      <div
+        className="relative bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/src/assets/img/fondo.png')", // 🔄 Usa aquí la ruta de tu imagen
+        }}
+      >
+        {/* Capa semitransparente para mejorar la legibilidad del texto */}
+        <div className="absolute inset-0 bg-white/60 lg:bg-white/50"></div>
 
-          <p className="text-gray-600 mb-8 text-base sm:text-lg">
-            Ginecología y salud íntima con enfoque humano y atención personalizada.
-          </p>
+        {/* Contenido principal */}
+        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 items-center gap-10 px-6 py-20">
+          {/* --- Columna izquierda: texto --- */}
+          <div className="text-center lg:text-left z-10">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+              Cuidado Integral Femenino con{" "}
+              <span className="text-purple-700">Profesionalismo</span> y{" "}
+              <span className="text-purple-700">Empatía</span>
+            </h1>
 
-          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-            <button onClick={() => handleScroll("services")} className="gap-1 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">
-              <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
-             Ver servicios
-            </button>
-            <button   onClick={() => navigate("/agenda")} className="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition-colors">
+            <p className="text-gray-700 mb-8 text-base sm:text-lg">
+              Ginecología y salud íntima con enfoque humano y atención
+              personalizada.
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+              <button
+                onClick={() => handleScroll("services")}
+                className="gap-1 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors"
+              >
+                <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
+                Ver servicios
+              </button>
+              <button
+                onClick={() => navigate("/agenda")}
+                className="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition-colors"
+              >
                 <FontAwesomeIcon icon={faCalendarDays} className="mr-2" />
-              Agendar cita
-            </button>
+                Agendar cita
+              </button>
+            </div>
+          </div>
+
+          {/* --- Columna derecha opcional (podés quitar si usás fondo completo) --- */}
+          <div className="hidden lg:flex justify-center">
+            {/* <img
+        src="/src/assets/img/hero.png"
+        alt="Cuidado Femenino"
+        className="max-w-sm"
+      /> */}
           </div>
         </div>
-
-        {/* --- Columna derecha: imagen ilustrativa --- */}
-        <div className="flex justify-center lg:justify-center">
-          <img
-            src="/src/assets/img/hero.png" // 🟣 Cambia por la ruta de tu imagen
-            alt="Cuidado Femenino"
-            className="max-w-xs sm:max-w-sm lg:max-w-md"
-          />
-        </div>
       </div>
-       
-       <div className="bg-white pt-6 pb-8">
-         <div className="max-w-screen-xl mx-auto text-center px-4">
+
+      <div className="bg-white pt-6 pb-8">
+        <div className="max-w-screen-xl mx-auto text-center px-4">
           <h4 className="text-purple-700 pb-3 font-bold  text-lg mb-4 ">
-             Alianzas y Colaboraciones
-           </h4>
+            Alianzas y Colaboraciones
+          </h4>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 justify-items-center items-center">
             {/* Nota: Asegúrate de que las rutas 'logoX' sean correctas */}
@@ -274,11 +288,7 @@ export default function Hero() {
             />
           </div>
         </div>
-         </div>
-      
-
-
-      
+      </div>
     </section>
   );
 }

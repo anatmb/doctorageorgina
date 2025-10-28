@@ -18,7 +18,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        purpleClinic: "#3E1A47",
+        goldClinic: "#CBA135",
+        beigeClinic: "#F7EFEA",
+        textClinic: "#2B2B2B",
+        whiteClinic: "#FFFFFF",
+    },
+
+   },
     
   },
   plugins: [],

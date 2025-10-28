@@ -1,7 +1,11 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faRightFromBracket, faUserShield } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faRightFromBracket,
+  faUserShield,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -40,23 +44,35 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
         <h1
           onClick={() => navigate("/")}
-          className="text-lg md:text-xl font-bold text-purple-700 cursor-pointer"
+          className="text-lg md:text-xl font-bold italic font-serif text-purple-700 cursor-pointer"
         >
           Dra. Georgina Meléndez
         </h1>
 
         {/* Menú Desktop */}
         <nav className="hidden md:flex gap-6 text-gray-700 items-center">
-          <button onClick={() => handleScroll("inicio")} className="hover:text-purple-700 transition-colors">
+          <button
+            onClick={() => handleScroll("inicio")}
+            className="hover:text-purple-700 transition-colors"
+          >
             Inicio
           </button>
-          <button onClick={() => handleScroll("services")} className="hover:text-purple-700 transition-colors">
+          <button
+            onClick={() => handleScroll("services")}
+            className="hover:text-purple-700 transition-colors"
+          >
             Servicios
           </button>
-          <button onClick={() => handleScroll("about")} className="hover:text-purple-700 transition-colors">
+          <button
+            onClick={() => handleScroll("about")}
+            className="hover:text-purple-700 transition-colors"
+          >
             Sobre mí
           </button>
-          <button onClick={() => handleScroll("contact")} className="hover:text-purple-700 transition-colors">
+          <button
+            onClick={() => handleScroll("contact")}
+            className="hover:text-purple-700 transition-colors"
+          >
             Contacto
           </button>
 
@@ -104,16 +120,28 @@ export default function Navbar() {
       {/* Menú Mobile */}
       {open && (
         <nav className="md:hidden flex flex-col items-center bg-purple-50 py-4 gap-4 text-gray-700 shadow-md">
-          <button onClick={() => handleScroll("inicio")} className="hover:text-purple-700">
+          <button
+            onClick={() => handleScroll("inicio")}
+            className="hover:text-purple-700"
+          >
             Inicio
           </button>
-          <button onClick={() => handleScroll("services")} className="hover:text-purple-700">
+          <button
+            onClick={() => handleScroll("services")}
+            className="hover:text-purple-700"
+          >
             Servicios
           </button>
-          <button onClick={() => handleScroll("about")} className="hover:text-purple-700">
+          <button
+            onClick={() => handleScroll("about")}
+            className="hover:text-purple-700"
+          >
             Sobre mí
           </button>
-          <button onClick={() => handleScroll("contact")} className="hover:text-purple-700">
+          <button
+            onClick={() => handleScroll("contact")}
+            className="hover:text-purple-700"
+          >
             Contacto
           </button>
 
