@@ -219,15 +219,24 @@ export default function Hero() {
               <span className="text-purple-700">Empatía</span>
             </h1>
 
-            <p className="text-gray-700 mb-8 text-base sm:text-lg">
+            <p className="text-gray-700 mb-2 text-base sm:text-lg">
               Ginecología y salud íntima con enfoque humano y atención
               personalizada.
             </p>
 
+            <div className="flex justify-center md:justify-start mb-4 gap-6 text-2xl">
+              <a href="#" className="text-yellow-400 hover:text-yellow-500">
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
+              <a href="#" className="text-yellow-400 hover:text-yellow-500">
+                <FontAwesomeIcon icon={faWhatsapp} />
+              </a>
+            </div>
+
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
               <button
                 onClick={() => handleScroll("services")}
-                className="gap-1 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors"
+                className="gap-1 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition-colors"
               >
                 <FontAwesomeIcon icon={faLocationDot} className="mr-2" />
                 Ver servicios
@@ -258,9 +267,33 @@ export default function Hero() {
           <h4 className="text-purple-700 pb-3 font-bold  text-lg mb-4 ">
             Alianzas y Colaboraciones
           </h4>
+          <div className="relative overflow-hidden">
+            {/* Contenedor animado */}
+            <div className="flex animate-scroll gap-16">
+              {[
+                logo1,
+                logo2,
+                logo3,
+                logo4,
+                logo5,
+                logo1,
+                logo2,
+                logo3,
+                logo4,
+                logo5,
+              ].map((logo, i) => (
+                <img
+                  key={i}
+                  src={logo}
+                  alt={`Logo ${i + 1}`}
+                  className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition duration-300 grayscale hover:grayscale-0"
+                />
+              ))}
+            </div>
+          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 justify-items-center items-center">
-            {/* Nota: Asegúrate de que las rutas 'logoX' sean correctas */}
+          {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 justify-items-center items-center">
+            {/* Nota: Asegúrate de que las rutas 'logoX' sean correctas 
             <img
               src={logo1}
               alt="Logo 1"
@@ -286,7 +319,7 @@ export default function Hero() {
               alt="Logo 5"
               className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition duration-300 grayscale hover:grayscale-0"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

@@ -101,7 +101,7 @@ export default function Navbar() {
           ) : (
             <button
               onClick={() => navigate("/login")}
-              className="flex items-center gap-1 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors"
+              className="flex items-center gap-1 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-500 transition-colors"
             >
               <FontAwesomeIcon icon={faUser} /> Login Admin
             </button>

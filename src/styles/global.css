@@ -8,7 +8,7 @@
   } */
 }
 
-@layer utilities {
+/* @layer utilities {
   .clip-path-diagonal {
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
@@ -25,4 +25,26 @@
 
 .animation-delay-2000 { animation-delay: 0s; }
 .animation-delay-4000 { animation-delay: 2s; }
-.animation-delay-6000 { animation-delay: 4s; }
+.animation-delay-6000 { animation-delay: 4s; } */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #7c3aed; /* púrpura */
+}
+
+.swiper-pagination-bullet-active {
+  background: #7c3aed !important;
+}
