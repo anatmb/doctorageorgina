@@ -193,6 +193,7 @@ export default function Agenda() {
   const [step, setStep] = useState<"calendar" | "form">("calendar");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [dni, setDni] = useState(""); // ✅ NUEVO estado para el DNI
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -219,6 +220,7 @@ export default function Agenda() {
     e.preventDefault();
 
     const newAppointment = {
+      dni, // ✅ agregamos el DNI al objeto enviado
       nombre: formData.nombre,
       apellido: formData.apellido,
       email: formData.email,
@@ -240,7 +242,14 @@ export default function Agenda() {
       if (res.ok) {
         alert(data.message || "Cita guardada correctamente ✅");
         setStep("calendar");
-        setFormData({ nombre: "", apellido: "", email: "", telefono: "", motivo: "" });
+        setFormData({
+          nombre: "",
+          apellido: "",
+          email: "",
+          telefono: "",
+          motivo: "",
+        });
+        setDni(""); // ✅ limpiar DNI
         setSelectedDate("");
         setSelectedTime("");
       } else {
@@ -260,11 +269,20 @@ export default function Agenda() {
           {/* Paso 1: Calendario */}
           {step === "calendar" && (
             <>
-              <FontAwesomeIcon icon={faCalendarDays} className="text-purple-600 text-4xl mb-3 mx-auto" />
-              <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">Selecciona tu turno</h2>
-              <p className="text-gray-600 mb-4 text-center">Elige el día y la hora disponible para tu consulta</p>
+              <FontAwesomeIcon
+                icon={faCalendarDays}
+                className="text-purple-600 text-4xl mb-3 mx-auto"
+              />
+              <h2 className="text-2xl font-bold text-gray-800 mb-2 text-center">
+                Selecciona tu turno
+              </h2>
+              <p className="text-gray-600 mb-4 text-center">
+                Elige el día y la hora disponible para tu consulta
+              </p>
 
-              <label className="block text-left text-gray-700 mb-1">Fecha:</label>
+              <label className="block text-left text-gray-700 mb-1">
+                Fecha:
+              </label>
               <input
                 type="date"
                 className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -272,7 +290,9 @@ export default function Agenda() {
                 onChange={(e) => setSelectedDate(e.target.value)}
               />
 
-              <label className="block text-left text-gray-700 mb-1">Hora:</label>
+              <label className="block text-left text-gray-700 mb-1">
+                Hora:
+              </label>
               <select
                 className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 value={selectedTime}
@@ -301,18 +321,37 @@ export default function Agenda() {
           {/* Paso 2: Formulario */}
           {step === "form" && (
             <>
-              <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">Completa tus datos</h2>
+              <h2 className="text-2xl font-bold text-purple-700 mb-4 text-center">
+                Completa tus datos
+              </h2>
               <p className="text-sm text-gray-600 text-center mb-4">
-                Turno seleccionado: <span className="font-semibold text-purple-700">{selectedDate}</span> a las{" "}
-                <span className="font-semibold text-purple-700">{selectedTime}</span>
+                Turno seleccionado:{" "}
+                <span className="font-semibold text-purple-700">
+                  {selectedDate}
+                </span>{" "}
+                a las{" "}
+                <span className="font-semibold text-purple-700">
+                  {selectedTime}
+                </span>
               </p>
+
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input
+                  type="text"
+                  placeholder="DNI"
+                  className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+                  value={dni}
+                  onChange={(e) => setDni(e.target.value)}
+                  required
+                />
                 <input
                   type="text"
                   placeholder="Nombre"
                   className="border border-purple-300 rounded-lg px-3 py-2 w-full"
                   value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, nombre: e.target.value })
+                  }
                   required
                 />
                 <input
@@ -320,7 +359,9 @@ export default function Agenda() {
                   placeholder="Apellido"
                   className="border border-purple-300 rounded-lg px-3 py-2 w-full"
                   value={formData.apellido}
-                  onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, apellido: e.target.value })
+                  }
                   required
                 />
                 <input
@@ -328,7 +369,9 @@ export default function Agenda() {
                   placeholder="Email"
                   className="border border-purple-300 rounded-lg px-3 py-2 w-full"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                 />
                 <input
@@ -336,14 +379,18 @@ export default function Agenda() {
                   placeholder="Teléfono"
                   className="border border-purple-300 rounded-lg px-3 py-2 w-full"
                   value={formData.telefono}
-                  onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, telefono: e.target.value })
+                  }
                   required
                 />
                 <textarea
                   placeholder="Motivo de la consulta"
                   className="border border-purple-300 rounded-lg px-3 py-2 w-full"
                   value={formData.motivo}
-                  onChange={(e) => setFormData({ ...formData, motivo: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, motivo: e.target.value })
+                  }
                   required
                 />
 

@@ -4,16 +4,17 @@ import  pool  from "../db/connection.js";
 // Crear nueva cita
 export const createAppointment = async (req, res) => {
   try {
-    const { nombre, apellido, email, telefono, motivo, fecha, hora } = req.body;
+    const { nombre, apellido, email, telefono, dni, motivo, fecha, hora } = req.body;
 
-    if (!nombre || !apellido || !email || !telefono || !motivo || !fecha || !hora) {
+    // Verificamos que todos los campos sean obligatorios
+    if (!nombre || !apellido || !email || !telefono || !dni || !motivo || !fecha || !hora) {
       return res.status(400).json({ message: "Todos los campos son obligatorios" });
     }
 
     await pool.query(
-      `INSERT INTO appointments (nombre, apellido, email, telefono, motivo, fecha, hora)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-      [nombre, apellido, email, telefono, motivo, fecha, hora]
+      `INSERT INTO appointments (nombre, apellido, email, telefono, dni, motivo, fecha, hora)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      [nombre, apellido, email, telefono, dni, motivo, fecha, hora]
     );
 
     res.json({ message: "Cita registrada correctamente ✅" });
@@ -48,3 +49,40 @@ export const getAppointmentsByDate = async (req, res) => {
      res.status(500).json({ message: "Error al obtener todas las citas ❌" });
    }
  };
+
+ 
+// 🗑️ Eliminar cita
+export const deleteAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query("DELETE FROM appointments WHERE id = $1", [id]);
+    res.json({ message: "Cita eliminada correctamente 🗑️" });
+  } catch (error) {
+    console.error("Error al eliminar cita:", error);
+    res.status(500).json({ message: "Error al eliminar la cita ❌" });
+  }
+};
+
+// ✏️ Editar cita
+export const updateAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre, apellido, dni, email, telefono, motivo, fecha, hora } = req.body;
+
+    if (!nombre || !apellido || !dni || !telefono || !motivo || !fecha || !hora) {
+      return res.status(400).json({ message: "Todos los campos son obligatorios" });
+    }
+
+    await pool.query(
+      `UPDATE appointments 
+       SET nombre=$1, apellido=$2, dni=$3, email=$4, telefono=$5, motivo=$6, fecha=$7, hora=$8
+       WHERE id=$9`,
+      [nombre, apellido, dni, email, telefono, motivo, fecha, hora, id]
+    );
+
+    res.json({ message: "Cita actualizada correctamente ✅" });
+  } catch (error) {
+    console.error("Error al actualizar cita:", error);
+    res.status(500).json({ message: "Error al actualizar la cita ❌" });
+  }
+};

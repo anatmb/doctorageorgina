@@ -1,5 +1,5 @@
 import express from "express";
-import { createAppointment, getAppointmentsByDate, getAllAppointments } from "../controllers/appointmentsController.js";
+import { createAppointment, getAppointmentsByDate, getAllAppointments, deleteAppointment, updateAppointment } from "../controllers/appointmentsController.js";
 
 const router = express.Router();
 
@@ -15,6 +15,12 @@ router.get("/", getAllAppointments);
 
 // Obtener citas por fecha (por ejemplo /api/appointments/2025-10-20)
 router.get("/:date", getAppointmentsByDate);
+
+// Actualizar cita
+router.put("/:id", updateAppointment);
+
+// Eliminar cita
+router.delete("/:id", deleteAppointment);
 
 
 
