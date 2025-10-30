@@ -63,6 +63,29 @@ export const deleteAppointment = async (req, res) => {
   }
 };
 
+// Obtener cita por ID
+export const getAppointmentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Verificamos si viene el id y si es un número
+    if (!id || isNaN(Number(id))) {
+      return res.status(400).json({ message: "ID de cita inválido ❌" });
+    }
+
+    const result = await pool.query("SELECT * FROM appointments WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Cita no encontrada ❌" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error al obtener cita por ID:", error);
+    res.status(500).json({ message: error.message || "Error al obtener la cita ❌" });
+  }
+};
+
 // ✏️ Editar cita
 export const updateAppointment = async (req, res) => {
   try {

@@ -230,6 +230,8 @@ export default function Agenda() {
       hora: selectedTime,
     };
 
+    console.log("Datos enviados al backend:", newAppointment);
+
     try {
       const res = await fetch("http://localhost:5000/api/appointments", {
         method: "POST",

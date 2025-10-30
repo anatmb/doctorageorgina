@@ -85,12 +85,12 @@ export default function Navbar() {
 
           {isAdminLogged ? (
             <>
-              {/* <button
+             <button
                 onClick={() => navigate("/admin")}
                 className="flex items-center gap-1 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors"
               >
                 <FontAwesomeIcon icon={faUserShield} /> Administrador
-              </button> */}
+              </button>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-1 bg-red-500 px-3 py-2 rounded-lg hover:bg-red-600 transition-colors"

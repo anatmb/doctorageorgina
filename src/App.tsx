@@ -8,7 +8,8 @@ import './App.css'
 import Navbar from "./components/Navbar.tsx";
 import Footer from "./components/Footer.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
-import AdminCitas from "./pages/admin.tsx";
+import AdminCitas from "./pages/Admin.tsx";
+import EditarCita from "./pages/EditarCita";
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/agenda" element={<Agenda />} /> 
           <Route path="/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminCitas />} />
+        <Route path="/editar-cita/:id" element={<EditarCita />} />
       </Routes>
       <Footer/>
     </Router>
