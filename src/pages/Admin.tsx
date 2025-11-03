@@ -414,7 +414,7 @@ const proximasCitas = obtenerProximasCitas();
           )}
 
           <button
-            onClick={() => navigate("/admin-citas")}
+            onClick={() => navigate("/calendario")}
             className="mt-4 w-full bg-purple-100 text-purple-700 font-semibold py-2 rounded-lg hover:bg-purple-200 transition"
           >
             Ver Calendario Completo

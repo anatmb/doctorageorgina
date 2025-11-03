@@ -4,13 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Agenda from "./pages/Agenda.tsx";
 
+
 import './App.css'
 import Navbar from "./components/Navbar.tsx";
 import Footer from "./components/Footer.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminCitas from "./pages/Admin.tsx";
+import CalendarioCita from "./pages/CalendarioCitas.tsx"
 import EditarCita from "./pages/EditarCita";
-
 
 
 
@@ -27,7 +28,8 @@ function App() {
 
         <Route path="/agenda" element={<Agenda />} /> 
           <Route path="/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminCitas />} />
+         <Route path="/admin" element={<AdminCitas />} /> 
+           <Route path="/calendario" element={<CalendarioCita />} />
         <Route path="/editar-cita/:id" element={<EditarCita />} />
       </Routes>
       <Footer/>
