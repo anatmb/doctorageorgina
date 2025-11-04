@@ -6,23 +6,38 @@ export const createAppointment = async (req, res) => {
   try {
     const { nombre, apellido, email, telefono, dni, motivo, fecha, hora } = req.body;
 
-    // Verificamos que todos los campos sean obligatorios
+    // ✅ Verificar campos obligatorios
     if (!nombre || !apellido || !email || !telefono || !dni || !motivo || !fecha || !hora) {
       return res.status(400).json({ message: "Todos los campos son obligatorios" });
     }
 
-    await pool.query(
-      `INSERT INTO appointments (nombre, apellido, email, telefono, dni, motivo, fecha, hora)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-      [nombre, apellido, email, telefono, dni, motivo, fecha, hora]
+    // ✅ Verificar si el paciente ya existe (por DNI o email)
+    const pacientePrevio = await pool.query(
+      "SELECT id FROM appointments WHERE dni = $1 OR email = $2 LIMIT 1",
+      [dni, email]
     );
 
-    res.json({ message: "Cita registrada correctamente ✅" });
+    // Si no tiene citas previas → paciente nuevo
+    const esNuevo = pacientePrevio.rows.length === 0;
+
+    // ✅ Insertar cita con el campo `es_nuevo`
+    await pool.query(
+      `INSERT INTO appointments (nombre, apellido, email, telefono, dni, motivo, fecha, hora, es_nuevo)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [nombre, apellido, email, telefono, dni, motivo, fecha, hora, esNuevo]
+    );
+
+    res.json({
+      message: esNuevo
+        ? "Cita registrada correctamente ✅ (nuevo paciente)"
+        : "Cita registrada correctamente ✅ (paciente existente)",
+    });
   } catch (error) {
     console.error("Error al crear cita:", error);
     res.status(500).json({ message: "Error al guardar la cita ❌" });
   }
 };
+
 
 // Obtener citas por fecha
 export const getAppointmentsByDate = async (req, res) => {

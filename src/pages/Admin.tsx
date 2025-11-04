@@ -317,7 +317,8 @@ type Cita = {
   telefono: string;
   motivo: string;
   fecha: string; // formato ISO (YYYY-MM-DD o con T)
-  hora: string;  // formato HH:mm:ss
+  hora: string; // formato HH:mm:ss
+  es_nuevo: boolean;
 };
 
 export default function AdminCitas() {
@@ -335,6 +336,7 @@ export default function AdminCitas() {
     }
   };
 
+  // ✅ Este useEffect verifica el token y carga las citas
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     if (!token) {
@@ -344,31 +346,38 @@ export default function AdminCitas() {
     fetchCitas();
   }, [navigate]);
 
-// 🕐 Filtrar las citas de HOY o próximas según la hora actual
-const obtenerProximasCitas = () => {
-  const ahora = new Date();
-  const hoyStr = ahora.toLocaleDateString("en-CA"); // YYYY-MM-DD local
+  // ⚠️ Este nuevo useEffect muestra una alerta si hay pacientes nuevos
+  useEffect(() => {
+    const nuevos = citas.filter((c) => c.es_nuevo);
+    if (nuevos.length > 0) {
+      alert(`👨‍⚕️ Hay ${nuevos.length} pacientes nuevos para revisar.`);
+    }
+  }, [citas]);
 
-  return citas
-    .filter((c) => {
-      const fechaCita = (c.fecha || "").split("T")[0];
-      if (fechaCita < hoyStr) return false; // descarta pasadas
+  // 🕐 Filtrar las citas de HOY o próximas según la hora actual
+  const obtenerProximasCitas = () => {
+    const ahora = new Date();
+    const hoyStr = ahora.toLocaleDateString("en-CA");
 
-      // combinar fecha + hora para comparar con ahora
-      const fechaHoraCita = new Date(`${fechaCita}T${c.hora}`);
-      return fechaHoraCita >= ahora; // solo las próximas
-    })
-    .sort((a, b) => {
-      const fechaHoraA = new Date(`${a.fecha.split("T")[0]}T${a.hora}`);
-      const fechaHoraB = new Date(`${b.fecha.split("T")[0]}T${b.hora}`);
-      return fechaHoraA.getTime() - fechaHoraB.getTime();
-    })
-    .slice(0, 3); // 👈 muestra solo las 3 próximas citas
-};
+    return citas
+      .filter((c) => {
+        const fechaCita = (c.fecha || "").split("T")[0];
+        if (fechaCita < hoyStr) return false;
 
-const proximasCitas = obtenerProximasCitas();
+        const fechaHoraCita = new Date(`${fechaCita}T${c.hora}`);
+        return fechaHoraCita >= ahora;
+      })
+      .sort((a, b) => {
+        const fechaHoraA = new Date(`${a.fecha.split("T")[0]}T${a.hora}`);
+        const fechaHoraB = new Date(`${b.fecha.split("T")[0]}T${b.hora}`);
+        return fechaHoraA.getTime() - fechaHoraB.getTime();
+      })
+      .slice(0, 3);
+  };
 
-  // 🔹 Datos fijos del dashboard (los podés traer del backend si querés)
+  const proximasCitas = obtenerProximasCitas();
+
+  // 🔹 Datos fijos del dashboard
   const pacientesNuevosMes = 12;
   const consultasSemana = 28;
   const citasCanceladasHoy = 1;
@@ -396,13 +405,18 @@ const proximasCitas = obtenerProximasCitas();
                   <div>
                     <p className="font-medium">
                       {cita.hora.slice(0, 5)} - {cita.nombre} {cita.apellido}
+                      {cita.es_nuevo && (
+                        <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                          🆕 Nuevo paciente
+                        </span>
+                      )}
                     </p>
                     <p className="text-sm text-gray-500">
                       {cita.motivo} ({cita.fecha.split("T")[0]})
                     </p>
                   </div>
                   <button className="text-blue-600 text-sm font-medium hover:underline">
-                    Abrir Expediente
+                    {cita.es_nuevo ? "Crear expediente" : "Abrir expediente"}
                   </button>
                 </li>
               ))}
