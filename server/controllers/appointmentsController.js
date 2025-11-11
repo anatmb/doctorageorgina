@@ -79,7 +79,7 @@ export const getAllAppointments = async (req, res) => {
   try {
     const result = await pool.query(`
       SELECT 
-        a.id AS cita_id,
+        a.id AS id,   
         a.fecha,
         a.hora,
         a.motivo,
