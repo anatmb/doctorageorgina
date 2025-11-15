@@ -104,6 +104,21 @@ useEffect(() => {
 
   fetchBusySlots();
 }, []);
+
+
+
+
+const isWeekend = (dateString: string) => {
+  const [year, month, day] = dateString.split("-").map(Number);
+
+  // Construir fecha en UTC para evitar cambios por zona horaria
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  const dayOfWeek = date.getUTCDay(); // 0 = domingo, 6 = sábado
+
+  return dayOfWeek === 0 || dayOfWeek === 6;
+};
+
   return (
     <section className="h-screen flex flex-col lg:flex-row">
       {/* --- Left: Formulario / Calendario --- */}
@@ -126,15 +141,22 @@ useEffect(() => {
               <label className="block text-left text-gray-700 mb-1">
                 Fecha:
               </label>
-              <input
-                type="date"
-                className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                value={selectedDate}
-                onChange={(e) => {
-                  setSelectedDate(e.target.value);
-                  setSelectedTime(""); // RESET DE HORA
-                }}
-              />
+          <input
+  type="date"
+  className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  value={selectedDate}
+  onChange={(e) => {
+    const value = e.target.value;
+
+    if (isWeekend(value)) {
+      alert("No se pueden seleccionar fines de semana ❌");
+      return;
+    }
+
+    setSelectedDate(value);
+    setSelectedTime("");
+  }}
+/>
 
               <label className="block text-left text-gray-700 mb-1">
                 Hora:
