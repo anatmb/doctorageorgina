@@ -119,6 +119,8 @@ const isWeekend = (dateString: string) => {
   return dayOfWeek === 0 || dayOfWeek === 6;
 };
 
+
+
   return (
     <section className="h-screen flex flex-col lg:flex-row">
       {/* --- Left: Formulario / Calendario --- */}
