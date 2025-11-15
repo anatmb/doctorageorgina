@@ -80,46 +80,41 @@ export default function Agenda() {
       alert("Error al guardar la cita ❌");
     }
   };
-type BusySlot = {
-  fecha: string;
-  hora: string;
-};
-
-useEffect(() => {
-  const fetchBusySlots = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/appointments/busy");
-      const data: BusySlot[] = await res.json();
-
-      const formatted = data.map((slot: BusySlot) => ({
-        fecha: slot.fecha.split("T")[0],
-        hora: slot.hora.slice(0, 5),
-      }));
-
-      setBusySlots(formatted);
-    } catch (error) {
-      console.error("Error al cargar horarios ocupados:", error);
-    }
+  type BusySlot = {
+    fecha: string;
+    hora: string;
   };
 
-  fetchBusySlots();
-}, []);
+  useEffect(() => {
+    const fetchBusySlots = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/appointments/busy");
+        const data: BusySlot[] = await res.json();
 
+        const formatted = data.map((slot: BusySlot) => ({
+          fecha: slot.fecha.split("T")[0],
+          hora: slot.hora.slice(0, 5),
+        }));
 
+        setBusySlots(formatted);
+      } catch (error) {
+        console.error("Error al cargar horarios ocupados:", error);
+      }
+    };
 
+    fetchBusySlots();
+  }, []);
 
-const isWeekend = (dateString: string) => {
-  const [year, month, day] = dateString.split("-").map(Number);
+  const isWeekend = (dateString: string) => {
+    const [year, month, day] = dateString.split("-").map(Number);
 
-  // Construir fecha en UTC para evitar cambios por zona horaria
-  const date = new Date(Date.UTC(year, month - 1, day));
+    // Construir fecha en UTC para evitar cambios por zona horaria
+    const date = new Date(Date.UTC(year, month - 1, day));
 
-  const dayOfWeek = date.getUTCDay(); // 0 = domingo, 6 = sábado
+    const dayOfWeek = date.getUTCDay(); // 0 = domingo, 6 = sábado
 
-  return dayOfWeek === 0 || dayOfWeek === 6;
-};
-
-
+    return dayOfWeek === 0 || dayOfWeek === 6;
+  };
 
   return (
     <section className="h-screen flex flex-col lg:flex-row">
@@ -143,8 +138,9 @@ const isWeekend = (dateString: string) => {
               <label className="block text-left text-gray-700 mb-1">
                 Fecha:
               </label>
-          <input
+           <input
   type="date"
+  min={new Date().toISOString().split("T")[0]}  // ⬅️ Bloquea días pasados
   className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
   value={selectedDate}
   onChange={(e) => {
