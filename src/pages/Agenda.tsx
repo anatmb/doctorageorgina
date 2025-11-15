@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import agendaImage from "../assets/img/Dra. Melendez.png"; // ajusta la ruta a tu imagen
@@ -15,6 +15,10 @@ export default function Agenda() {
     telefono: "",
     motivo: "",
   });
+
+  const [busySlots, setBusySlots] = useState<{ fecha: string; hora: string }[]>(
+    []
+  );
 
   // Confirmar fecha y hora
   const handleConfirm = () => {
@@ -76,7 +80,30 @@ export default function Agenda() {
       alert("Error al guardar la cita ❌");
     }
   };
+type BusySlot = {
+  fecha: string;
+  hora: string;
+};
 
+useEffect(() => {
+  const fetchBusySlots = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/appointments/busy");
+      const data: BusySlot[] = await res.json();
+
+      const formatted = data.map((slot: BusySlot) => ({
+        fecha: slot.fecha.split("T")[0],
+        hora: slot.hora.slice(0, 5),
+      }));
+
+      setBusySlots(formatted);
+    } catch (error) {
+      console.error("Error al cargar horarios ocupados:", error);
+    }
+  };
+
+  fetchBusySlots();
+}, []);
   return (
     <section className="h-screen flex flex-col lg:flex-row">
       {/* --- Left: Formulario / Calendario --- */}
@@ -103,7 +130,10 @@ export default function Agenda() {
                 type="date"
                 className="border border-purple-300 rounded-lg px-3 py-2 w-full mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
                 value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
+                onChange={(e) => {
+                  setSelectedDate(e.target.value);
+                  setSelectedTime(""); // RESET DE HORA
+                }}
               />
 
               <label className="block text-left text-gray-700 mb-1">
@@ -115,15 +145,36 @@ export default function Agenda() {
                 onChange={(e) => setSelectedTime(e.target.value)}
               >
                 <option value="">Seleccionar hora</option>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
+
+                {[
+                  "08:00",
+                  "09:00",
+                  "10:00",
+                  "11:00",
+                  "14:00",
+                  "15:00",
+                  "16:00",
+                  "17:00",
+                ].map((hour) => {
+                  const isBusy = busySlots.some(
+                    (slot) => slot.fecha === selectedDate && slot.hora === hour
+                  );
+
+                  return (
+                    <option key={hour} value={hour} disabled={isBusy}>
+                      {hour} {isBusy ? "⛔ Ocupado" : ""}
+                    </option>
+                  );
+                })}
               </select>
+
+              {selectedDate &&
+                busySlots.filter((slot) => slot.fecha === selectedDate)
+                  .length === 8 && (
+                  <p className="text-red-600 text-sm">
+                    No quedan horarios disponibles en esta fecha ❌
+                  </p>
+                )}
 
               <button
                 onClick={handleConfirm}

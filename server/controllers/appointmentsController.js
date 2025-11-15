@@ -1,6 +1,4 @@
 import  pool  from "../db/connection.js";
-
-
 // Crear nueva cita
 export const createAppointment = async (req, res) => {
   try {
@@ -11,16 +9,29 @@ export const createAppointment = async (req, res) => {
       return res.status(400).json({ message: "Todos los campos son obligatorios ❌" });
     }
 
+    // ⭐ Verificar si ya existe una cita en esa fecha y hora (AQUÍ ES DONDE DEBE IR)
+    const existingAppointment = await pool.query(
+      `SELECT id FROM appointments WHERE fecha = $1 AND hora = $2`,
+      [fecha, hora]
+    );
+
+    if (existingAppointment.rows.length > 0) {
+      return res.status(400).json({
+        message: "❌ Ese horario ya está ocupado. Por favor elige otro.",
+      });
+    }
+
     // 1️⃣ Verificar si el paciente ya existe (por DNI)
-    const existingPatient = await pool.query("SELECT id FROM patients WHERE dni = $1", [dni]);
+    const existingPatient = await pool.query(
+      "SELECT id FROM patients WHERE dni = $1",
+      [dni]
+    );
 
     let patientId;
 
     if (existingPatient.rows.length > 0) {
-      // Paciente ya existe
       patientId = existingPatient.rows[0].id;
     } else {
-      // 2️⃣ Crear nuevo paciente
       const newPatient = await pool.query(
         `INSERT INTO patients (nombre, apellido, email, telefono, dni)
          VALUES ($1, $2, $3, $4, $5)
@@ -48,6 +59,32 @@ export const createAppointment = async (req, res) => {
     res.status(500).json({ message: "Error al guardar la cita ❌" });
   }
 };
+
+export const getBusySlots = async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT fecha, hora FROM appointments ORDER BY fecha, hora"
+    );
+
+    const normalized = result.rows.map(slot => {
+      // Normalizar fecha a YYYY-MM-DD
+      const fecha = slot.fecha instanceof Date
+        ? slot.fecha.toISOString().split("T")[0]
+        : slot.fecha;
+
+      // Normalizar hora a HH:MM
+      const hora = slot.hora.slice(0, 5);
+
+      return { fecha, hora };
+    });
+
+    return res.json(normalized);
+  } catch (error) {
+    console.error("Error al obtener horarios ocupados:", error);
+    return res.status(500).json([]);
+  }
+};
+
 
 // Obtener citas por fecha
 export const getAppointmentsByDate = async (req, res) => {
