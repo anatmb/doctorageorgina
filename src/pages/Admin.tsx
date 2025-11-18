@@ -547,9 +547,7 @@ export default function AdminCitas() {
   // 🔹 Filtrar citas por la fecha seleccionada
   const citasDelDia = citas.filter((cita) => {
     const fechaCita = cita.fecha.split("T")[0];
-    const fechaSeleccionadaISO = fechaSeleccionada
-      .toISOString()
-      .split("T")[0];
+    const fechaSeleccionadaISO = fechaSeleccionada.toISOString().split("T")[0];
     return fechaCita === fechaSeleccionadaISO;
   });
 
@@ -595,11 +593,26 @@ export default function AdminCitas() {
                     </span>
                   )}
                 </div>
+                {/* 
                 <button
                   onClick={() =>
                     navigate(`/expediente/${cita.dni}`, {
                       state: { cita },
                     })
+                  }
+                  className="text-blue-600 hover:underline text-sm"
+                >
+                  {cita.es_nuevo ? "Crear expediente" : "Abrir expediente"}
+                </button>*/}
+
+                <button
+                  onClick={() =>
+                    navigate(
+                      cita.es_nuevo
+                        ? `/expediente/${cita.dni}/crear`
+                        : `/expediente/${cita.dni}`,
+                      { state: { cita } }
+                    )
                   }
                   className="text-blue-600 hover:underline text-sm"
                 >
@@ -638,4 +651,3 @@ export default function AdminCitas() {
     </section>
   );
 }
-
