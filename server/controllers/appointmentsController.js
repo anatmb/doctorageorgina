@@ -211,3 +211,37 @@ export const updateAppointment = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar la cita ❌" });
   }
 };
+
+export const marcarPacienteComoExistente = async (req, res) => {
+  try {
+    const { dni } = req.params;
+
+    // 1️⃣ Obtener patient_id
+    const patientResult = await pool.query(
+      "SELECT id FROM patients WHERE dni = $1",
+      [dni]
+    );
+
+    if (patientResult.rows.length === 0) {
+      return res.status(404).json({ message: "Paciente no encontrado" });
+    }
+
+    const patientId = patientResult.rows[0].id;
+
+    // 2️⃣ Actualizar citas
+    await pool.query(
+      `
+      UPDATE appointments
+      SET es_nuevo = false
+      WHERE patient_id = $1
+      `,
+      [patientId]
+    );
+
+    res.json({ message: "Paciente marcado como existente ✅" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al actualizar cita ❌" });
+  }
+};
+

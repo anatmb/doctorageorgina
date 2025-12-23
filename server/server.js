@@ -31,6 +31,7 @@ import express from "express";
 import cors from "cors";
 import appointmentsRoutes from "./routes/appointments.js";
 import authRoutes from "./routes/auth.js";
+import  expedientesRoutes from "./routes/expedientesRoutes.js"
 import patientsRoutes from "./routes/patientsRoutes.js";
 
 const app = express();
@@ -41,6 +42,7 @@ app.use(express.json());
 app.use("/api/appointments", appointmentsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/patients", patientsRoutes);
+app.use("/api/expedientes", expedientesRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada ❌" });
