@@ -141,13 +141,16 @@ export default function AdminCitas() {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/patients/${dniBusqueda}`
+           `http://localhost:5000/api/patients/${dniBusqueda}`
+        
         );
 
         if (!res.ok) {
           alert("Paciente no registrado ❌");
           return;
         }
+
+        
 
         // Si existe, abrir expediente
         navigate(`/expediente/${dniBusqueda}`);
@@ -167,12 +170,3 @@ export default function AdminCitas() {
   );
 }
 
-
-{/* <h2 className="text-lg font-semibold text-gray-800 mb-3">
-            Próximos Recordatorios
-          </h2>
-          <ul className="space-y-2 text-gray-600 text-sm">
-            <li>📋 Revisión de exámenes pendiente</li>
-            <li>💬 Llamar a paciente Ana por resultados</li>
-            <li>🕓 Reunión médica semanal — 14:00 hs</li>
-          </ul> */}
