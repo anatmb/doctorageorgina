@@ -27,6 +27,8 @@
 // const PORT = 5000;
 // app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
 
+//para levantar el servidor el comando es node server js
+
 import express from "express";
 import cors from "cors";
 import appointmentsRoutes from "./routes/appointments.js";
