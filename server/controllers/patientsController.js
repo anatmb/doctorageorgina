@@ -38,3 +38,16 @@ console.log(typeof req.params.dni, req.params.dni);
     res.status(500).json({ message: "Error al buscar paciente ❌" });
   }
 };
+
+// Listar todos los pacientes
+export const getAllPatients = async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM patients ORDER BY id DESC"
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al listar pacientes:", error);
+    res.status(500).json({ message: "Error al listar pacientes ❌" });
+  }
+};
