@@ -11,6 +11,7 @@ import CalendarioCita from "./pages/CalendarioCitas.tsx";
 import EditarCita from "./pages/EditarCita";
 import CrearExpediente from "./pages/CrearExpediente.tsx";
 import VerExpediente from "./pages/VerExpediente.tsx";
+import Pacientes from "./pages/Pacientes.tsx";
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
           <Route path="/editar-cita/:id" element={<EditarCita />} />
            <Route path="/expediente/:dni/crear" element={<CrearExpediente/>} />
            <Route path="/expediente/:dni" element={<VerExpediente />} />
+           
+<Route path="/pacientes" element={<Pacientes />} />
+
         </Routes>
         <Footer />
       </Router>

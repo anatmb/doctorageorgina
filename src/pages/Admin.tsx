@@ -48,6 +48,11 @@ export default function AdminCitas() {
     return fechaCita === fechaSeleccionadaISO;
   });
 
+
+  // listar clientes
+
+
+
   return (
     <section className="min-h-screen bg-gray-50 flex flex-col lg:flex-row p-6 pt-16">
       {/* Panel Izquierdo: Lista de Citas */}
@@ -144,14 +149,10 @@ export default function AdminCitas() {
            `http://localhost:5000/api/patients/${dniBusqueda}`
         
         );
-
         if (!res.ok) {
           alert("Paciente no registrado ❌");
           return;
         }
-
-        
-
         // Si existe, abrir expediente
         navigate(`/expediente/${dniBusqueda}`);
       } catch (error) {
@@ -164,10 +165,12 @@ export default function AdminCitas() {
     Buscar paciente
   </button>
 
-  <button     className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition mt-3">
-    lista de pacientes
-  </button >
-
+<button
+  onClick={() => navigate("/pacientes")}
+  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition mt-3"
+>
+  Lista de pacientes
+</button>
         </div>
       </div>
     </section>
