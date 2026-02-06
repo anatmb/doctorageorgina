@@ -57,7 +57,8 @@ import {
   deleteAppointment,
   updateAppointment,
   marcarPacienteComoExistente,
-  getBusySlots
+  getBusySlots,
+  getAppointmentsByDni 
 } from "../controllers/appointmentsController.js";
 
 const router = express.Router();
@@ -84,6 +85,8 @@ router.put("/:dni/marcar-existente", marcarPacienteComoExistente);
 // Generales al final
 router.post("/", createAppointment);
 router.get("/", getAllAppointments);
+
+router.get("/historial/:dni", getAppointmentsByDni);
 
 router.put("/:id", updateAppointment);
 router.delete("/:id", deleteAppointment);

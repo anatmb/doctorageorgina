@@ -60,6 +60,32 @@ export const createAppointment = async (req, res) => {
   }
 };
 
+
+export const getAppointmentsByDni = async (req, res) => {
+  try {
+    const { dni } = req.params;
+
+    const result = await pool.query(
+      `
+      SELECT 
+        a.fecha,
+        a.hora,
+        a.motivo
+      FROM appointments a
+      JOIN patients p ON a.patient_id = p.id
+      WHERE p.dni = $1
+      ORDER BY a.fecha DESC, a.hora DESC
+      `,
+      [dni]
+    );
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al traer historial:", error);
+    res.status(500).json({ message: "Error al traer historial ❌" });
+  }
+};
+
 export const getBusySlots = async (req, res) => {
   try {
     const result = await pool.query(
