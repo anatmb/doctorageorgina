@@ -141,25 +141,33 @@ export default function AdminCitas() {
   />
 
   <button
-    onClick={async () => {
-      if (!dniBusqueda) return alert("Ingrese un DNI");
+  onClick={async () => {
+  if (!dniBusqueda) return alert("Ingrese un DNI");
 
-      try {
-        const res = await fetch(
-           `http://localhost:5000/api/patients/${dniBusqueda}`
-        
-        );
-        if (!res.ok) {
-          alert("Paciente no registrado ❌");
-          return;
-        }
-        // Si existe, abrir expediente
-        navigate(`/expediente/${dniBusqueda}`);
-      } catch (error) {
-        console.error(error);
-        alert("Error al buscar paciente");
-      }
-    }}
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/patients/${dniBusqueda}`
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert("Paciente no registrado ❌");
+      return;
+    }
+
+    if (!data.tieneExpediente) {
+      alert("Este paciente NO tiene expediente ❌");
+      return;
+    }
+
+    navigate(`/expediente/${dniBusqueda}`);
+
+  } catch (error) {
+    console.error(error);
+    alert("Error al buscar paciente");
+  }
+}}
     className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
   >
     Buscar paciente
