@@ -17,7 +17,7 @@ export default function Pacientes() {
   // 🔹 Traer pacientes
   const fetchPacientes = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/patients");
+      const res = await fetch("http://localhost:5000/api/patients/con-expediente");
       const data = await res.json();
       setPacientes(data);
     } catch (error) {

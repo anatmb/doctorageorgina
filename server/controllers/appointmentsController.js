@@ -102,16 +102,6 @@ export const getAppointmentsByDate = async (req, res) => {
 };
 
 
-//  export const getAllAppointments = async (req, res) => {
-//    try {
-//      const result = await pool.query("SELECT * FROM appointments ORDER BY fecha, hora");
-//      res.json(result.rows);
-//    } catch (error) {
-//      console.error("Error al obtener todas las citas:", error);
-//      res.status(500).json({ message: "Error al obtener todas las citas ❌" });
-//    }
-//  };
-
 export const getAllAppointments = async (req, res) => {
   try {
     const result = await pool.query(`

@@ -39,6 +39,25 @@ console.log(typeof req.params.dni, req.params.dni);
   }
 };
 
+
+
+export const getPatientsWithExpediente = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT DISTINCT p.*
+      FROM patients p
+      JOIN appointments a ON a.patient_id = p.id
+      WHERE a.es_nuevo = false
+      ORDER BY p.id DESC
+    `);
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al listar pacientes con expediente:", error);
+    res.status(500).json({ message: "Error ❌" });
+  }
+};
+
 // Listar todos los pacientes
 export const getAllPatients = async (req, res) => {
   try {

@@ -1,7 +1,9 @@
 import express from "express";
-import { getPatientByDni, getAllPatients } from "../controllers/patientsController.js";
+import { getPatientByDni, getAllPatients,getPatientsWithExpediente  } from "../controllers/patientsController.js";
 
 const router = express.Router();
+
+router.get("/con-expediente", getPatientsWithExpediente); 
 
 router.get("/", getAllPatients);
 
