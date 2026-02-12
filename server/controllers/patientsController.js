@@ -107,3 +107,44 @@ export const getAllPatients = async (req, res) => {
     res.status(500).json({ message: "Error al listar pacientes ❌" });
   }
 };
+
+// 🔴 Eliminar paciente por DNI
+export const deletePatientByDni = async (req, res) => {
+  try {
+    const { dni } = req.params;
+
+    // Primero borrar citas (foreign key)
+    await pool.query(
+      `
+      DELETE FROM appointments
+      WHERE patient_id = (SELECT id FROM patients WHERE dni = $1)
+      `,
+      [dni]
+    );
+
+    // Luego borrar expediente
+    await pool.query(
+      `
+      DELETE FROM expedientes
+      WHERE patient_id = (SELECT id FROM patients WHERE dni = $1)
+      `,
+      [dni]
+    );
+
+    // Finalmente borrar paciente
+    const result = await pool.query(
+      "DELETE FROM patients WHERE dni = $1 RETURNING *",
+      [dni]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Paciente no encontrado" });
+    }
+
+    res.json({ message: "Paciente eliminado correctamente ✅" });
+
+  } catch (error) {
+    console.error("Error al eliminar paciente:", error);
+    res.status(500).json({ message: "Error al eliminar ❌" });
+  }
+};
