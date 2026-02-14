@@ -41,7 +41,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-md z-50">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
+      <div className="max-w-6xl mx-auto flex justify-between items-center p-4 bg-white ">
         <h1
           onClick={() => navigate("/")}
           className="text-lg md:text-xl font-bold italic font-serif text-purple-700 cursor-pointer"

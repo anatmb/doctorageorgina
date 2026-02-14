@@ -54,7 +54,7 @@ export default function AdminCitas() {
 
 
   return (
-    <section className="min-h-screen bg-gray-50 flex flex-col lg:flex-row p-6 pt-16">
+    <section className="max-w-6xl mx-auto min-h-screen bg-gray-50 flex flex-col lg:flex-row p-6 pt-16">
       {/* Panel Izquierdo: Lista de Citas */}
       <div className="flex-1 bg-white rounded-2xl shadow-xl p-8">
         <h1 className="text-3xl font-bold text-blue-700 mb-2">
