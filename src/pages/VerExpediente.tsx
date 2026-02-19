@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface Expediente {
@@ -24,12 +24,18 @@ export default function VerExpediente() {
   const { dni } = useParams();
   const [expediente, setExpediente] = useState<Expediente | null>(null);
   const [historial, setHistorial] = useState<CitaHistorial[]>([]);
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   fetch(`http://localhost:5000/api/expedientes/${dni}`)
   //     .then(res => res.json())
   //     .then(data => setExpediente(data));
   // }, [dni]);
+
+
+  const handleEditar = () => {
+  navigate(`/editar-expediente/${dni}`);
+};
 
   useEffect(() => {
     // Expediente
@@ -55,6 +61,13 @@ export default function VerExpediente() {
       <h1 className="text-3xl font-bold text-blue-700 mb-6">
         Expediente Clínico
       </h1>
+
+        <button
+    onClick={handleEditar}
+    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+  >
+    Modificar Expediente
+  </button>
 
       <div className="bg-gray-100 p-5 rounded-xl mb-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-2">

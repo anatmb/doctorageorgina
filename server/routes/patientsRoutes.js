@@ -1,5 +1,5 @@
 import express from "express";
-import { getPatientByDni, getAllPatients,getPatientsWithExpediente, deletePatientByDni  } from "../controllers/patientsController.js";
+import { getPatientByDni, getAllPatients,getPatientsWithExpediente, deletePatientByDni,updatePatientByDni} from "../controllers/patientsController.js";
 
 const router = express.Router();
 
@@ -13,4 +13,5 @@ router.get("/", getAllPatients);
  // 🔴 ESTA ES LA QUE FALTA
 router.delete("/:dni", deletePatientByDni);
 
+router.put("/:dni", updatePatientByDni);
 export default router;

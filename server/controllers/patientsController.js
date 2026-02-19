@@ -148,3 +148,34 @@ export const deletePatientByDni = async (req, res) => {
     res.status(500).json({ message: "Error al eliminar ❌" });
   }
 };
+
+
+// 🟡 Modificar paciente por DNI
+export const updatePatientByDni = async (req, res) => {
+  try {
+    const { dni } = req.params;
+    const { nombre, apellido, telefono, email } = req.body;
+
+    const result = await pool.query(
+      `
+      UPDATE patients
+      SET nombre = $1,
+          apellido = $2,
+          telefono = $3,
+          email = $4
+      WHERE dni = $5
+      RETURNING *
+      `,
+      [nombre, apellido, telefono, email, dni]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Paciente no encontrado" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error al modificar paciente:", error);
+    res.status(500).json({ message: "Error al modificar ❌" });
+  }
+};
