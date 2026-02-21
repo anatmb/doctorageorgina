@@ -13,6 +13,7 @@ import CrearExpediente from "./pages/CrearExpediente.tsx";
 import VerExpediente from "./pages/VerExpediente.tsx";
 import Pacientes from "./pages/Pacientes.tsx";
 import EditarPaciente from "./pages/EditarPaciente.tsx";
+import EditarExpediente from "./pages/EditarExpediente";
 
 
 function App() {
@@ -32,9 +33,11 @@ function App() {
           <Route path="/editar-cita/:id" element={<EditarCita />} />
            <Route path="/expediente/:dni/crear" element={<CrearExpediente/>} />
            <Route path="/expediente/:dni" element={<VerExpediente />} />
+           <Route path="/editar-expediente/:dni" element={<EditarExpediente />} />
            
            <Route path="/pacientes" element={<Pacientes />} />
            <Route path="/paciente/editar/:dni" element={<EditarPaciente />} />
+
 
         </Routes>
         <Footer />

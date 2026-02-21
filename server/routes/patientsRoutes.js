@@ -14,4 +14,6 @@ router.get("/", getAllPatients);
 router.delete("/:dni", deletePatientByDni);
 
 router.put("/:dni", updatePatientByDni);
+
+
 export default router;

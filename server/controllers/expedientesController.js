@@ -141,3 +141,36 @@ export const getExpedienteByDni = async (req, res) => {
     res.status(500).json({ message: "Error al obtener expediente ❌" });
   }
 };
+
+export const updateExpediente = async (req, res) => {
+  try {
+    const { dni } = req.params;
+    const { antecedentes, diagnostico, tratamiento, observaciones } = req.body;
+
+    const result = await pool.query(
+      `
+      UPDATE expedientes e
+      SET 
+        antecedentes = $1,
+        diagnostico = $2,
+        tratamiento = $3,
+        observaciones = $4
+      FROM patients p
+      WHERE e.patient_id = p.id
+      AND p.dni = $5
+      RETURNING e.*;
+      `,
+      [antecedentes, diagnostico, tratamiento, observaciones, dni]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Expediente no encontrado" });
+    }
+
+    res.json({ message: "Expediente actualizado correctamente ✅" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al actualizar ❌" });
+  }
+};
