@@ -115,6 +115,41 @@ export default function Agenda() {
 
     return dayOfWeek === 0 || dayOfWeek === 6;
   };
+   
+  // 🔎 Buscar paciente por DNI
+const buscarPacientePorDni = async (dniValue: string) => {
+  if (!dniValue) return;
+
+  try {
+    const res = await fetch(
+      `http://localhost:5000/api/patients/${dniValue}`
+    );
+
+    if (!res.ok) {
+      // Si no existe, no hacemos nada
+      return;
+    }
+
+    const data = await res.json();
+
+    // Tu backend devuelve: { paciente, tieneExpediente }
+    const paciente = data.paciente;
+
+    if (paciente) {
+      setFormData((prev) => ({
+        ...prev,
+        nombre: paciente.nombre || "",
+        apellido: paciente.apellido || "",
+        email: paciente.email || "",
+        telefono: paciente.telefono || "",
+        motivo: "", // siempre vacío
+      }));
+    }
+  } catch (error) {
+    console.error("Error buscando paciente:", error);
+  }
+};
+
 
   return (
     <section className="h-screen flex flex-col lg:flex-row">
@@ -224,13 +259,30 @@ export default function Agenda() {
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input
-                  type="text"
-                  placeholder="DNI"
-                  className="border border-purple-300 rounded-lg px-3 py-2 w-full"
-                  value={dni}
-                  onChange={(e) => setDni(e.target.value)}
-                  required
-                />
+                  // type="text"
+                  // placeholder="DNI"
+                  // className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+                  // value={dni}
+                  // onChange={(e) => setDni(e.target.value)}
+                  // required
+
+                  
+  type="text"
+  placeholder="DNI"
+  className="border border-purple-300 rounded-lg px-3 py-2 w-full"
+  value={dni}
+  onChange={(e) => {
+    const value = e.target.value;
+    setDni(value);
+
+    // Cuando tenga al menos 7 números busca automáticamente
+    if (value.length >= 7) {
+      buscarPacientePorDni(value);
+    }
+  }}
+  required
+/>
+                
                 <input
                   type="text"
                   placeholder="Nombre"
