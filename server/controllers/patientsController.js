@@ -15,7 +15,7 @@
 //   }
 // };
 
-import pool from "../db/connection.js";
+
 // export const getPatientByDni = async (req, res) => {
 //   try {
 //     const dni = Number(req.params.dni);
@@ -39,6 +39,8 @@ import pool from "../db/connection.js";
 //   }
 // };
 
+import pool from "../db/connection.js";
+
 export const getPatientByDni = async (req, res) => {
   try {
     const { dni } = req.params;
@@ -46,10 +48,12 @@ export const getPatientByDni = async (req, res) => {
     const result = await pool.query(
       `
       SELECT 
-        p.id,
+          p.id,
         p.nombre,
         p.apellido,
         p.dni,
+        p.email,
+        p.telefono,
         a.es_nuevo
       FROM patients p
       LEFT JOIN appointments a ON a.patient_id = p.id
