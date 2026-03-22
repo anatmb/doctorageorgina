@@ -236,7 +236,8 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur border-b border-purple-100 shadow-sm z-50">
 
-      <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+      
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
 
         {/* LOGO */}
         <h1

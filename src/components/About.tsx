@@ -44,7 +44,7 @@ export default function About() {
   return (
     <section id="about" className="py-16 bg-purple-100 w-full">
       {/* Contenedor centrado con el mismo ancho que el hero */}
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
         
         {/* Texto */}
         <div className="flex-1">

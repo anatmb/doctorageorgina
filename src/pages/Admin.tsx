@@ -426,7 +426,7 @@ export default function AdminCitas() {
   const pacientesNuevos = citas.filter(c => c.es_nuevo).length;
 
   return (
-    <section className="min-h-screen bg-white p-6 pt-24">
+    <section className="min-h-screen max-w-7xl  mx-auto bg-white p-6 pt-24">
       
       {/* HEADER */}
       <div className="mb-8">

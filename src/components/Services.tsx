@@ -27,6 +27,37 @@
 //  );
 //  }
 
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faStethoscope, faBaby, faShieldHeart, faVenus, faFire, faScissors } from "@fortawesome/free-solid-svg-icons";
+
+// const services = [
+//   { title: "Consulta General", desc: "Revisiones preventivas y diagnósticos especializados.", icon: faStethoscope },
+//   { title: "Control Prenatal", desc: "Acompañamiento completo durante el embarazo.", icon: faBaby },
+//   { title: "Prevención", desc: "Programas de detección temprana de enfermedades.", icon: faShieldHeart },
+//   { title: "Salud Reproductiva", desc: "Asesoramiento en planificación y fertilidad.", icon: faVenus },
+//   { title: "Menopausia", desc: "Tratamiento integral para cambios hormonales.", icon: faFire },
+//   { title: "Cirugía Mínima", desc: "Procedimientos con técnicas mínimamente invasivas.", icon: faScissors },
+// ];
+
+// export default function Services() {
+//   return (
+//     <section id="services" className="py-16 bg-gray-50 text-center">
+//       <div className=" mx-auto px-6">
+//         <h2 className="text-2xl md:text-3xl font-bold text-purple-700 mb-12">Nuestros Servicios</h2>
+//         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+//           {services.map((s, i) => (
+//             <div key={i} className="bg-purple-100 shadow-md p-6 rounded-xl hover:shadow-lg transition">
+//               <FontAwesomeIcon icon={s.icon} className="text-yellow-500 text-3xl mb-4" />
+//               <h3 className="text-lg md:text-xl font-semibold text-purple-700 mb-2">{s.title}</h3>
+//               <p className="text-gray-600 text-sm md:text-base">{s.desc}</p>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStethoscope, faBaby, faShieldHeart, faVenus, faFire, faScissors } from "@fortawesome/free-solid-svg-icons";
 
@@ -41,18 +72,48 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-16 bg-gray-50 text-center">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-purple-700 mb-12">Nuestros Servicios</h2>
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+    <section id="services" className="py-20 bg-gray-50">
+      
+      <div className="max-w-7xl mx-auto px-6">
+
+        <h2 className="text-3xl md:text-4xl font-bold text-purple-700 text-center mb-14">
+          Nuestros Servicios
+        </h2>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
-            <div key={i} className="bg-purple-100 shadow-md p-6 rounded-xl hover:shadow-lg transition">
-              <FontAwesomeIcon icon={s.icon} className="text-yellow-500 text-3xl mb-4" />
-              <h3 className="text-lg md:text-xl font-semibold text-purple-700 mb-2">{s.title}</h3>
-              <p className="text-gray-600 text-sm md:text-base">{s.desc}</p>
+            <div
+              key={i}
+              className="
+              bg-white
+              border border-purple-100
+              shadow-md
+              p-8
+              rounded-2xl
+              hover:shadow-xl
+              hover:-translate-y-1
+              transition
+              duration-300
+              "
+            >
+              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-purple-100 mb-5">
+                <FontAwesomeIcon
+                  icon={s.icon}
+                  className="text-purple-700 text-xl"
+                />
+              </div>
+
+              <h3 className="text-lg font-semibold text-purple-700 mb-2">
+                {s.title}
+              </h3>
+
+              <p className="text-gray-600 text-sm leading-relaxed">
+                {s.desc}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
