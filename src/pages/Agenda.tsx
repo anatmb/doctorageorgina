@@ -152,7 +152,7 @@ const buscarPacientePorDni = async (dniValue: string) => {
 
 
   return (
-    <section id="agendar" className="h-screen flex flex-col lg:flex-row">
+    <section id="agenda" className="h-screen flex flex-col lg:flex-row">
       {/* --- Left: Formulario / Calendario --- */}
       <div className="flex-1 flex items-center justify-center bg-purple-400 p-6">
         <div className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-md">

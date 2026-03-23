@@ -14,6 +14,7 @@ import VerExpediente from "./pages/VerExpediente.tsx";
 import Pacientes from "./pages/Pacientes.tsx";
 import EditarPaciente from "./pages/EditarPaciente.tsx";
 import EditarExpediente from "./pages/EditarExpediente";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
     <>
       {/* <Home/>
        <Route path="/agenda" element={<Agenda />} /> */}
+       
       <Router>
+          <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
